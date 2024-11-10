@@ -14,6 +14,8 @@ dict = {"General Batman" : "4e63be1122d51e7cc915512588a06e9bd1ea60cbe59ba3b40dce
         "Colonel Spiderman" : "1e7cf8c7a52ad61ca65e9403ebef462bcf4c85c0a9b01c1726ace07f9b14ecac", 
         "President Trump  " : "ec4b5a41fbac55548db79a0d2db9abab37c60026adc6636e3f9c0a64411c7f42"}
 
+
+
 # passwords: AlfredisCute, TonyDead， IMissBiden
 
 def failLoginLog():
