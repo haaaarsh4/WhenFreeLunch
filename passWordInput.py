@@ -10,7 +10,7 @@ q = 5940619
 n = p*q
 
 
-dict = {"General Batman" : "4e63be1122d51e7cc915512588a06e9bd1ea60cbe59ba3b40dce00cde2dac23", 
+dict = {"General Batman" : "4e63be1122d51e7cc915512588a06e9bd1ea60cbe59ba3b40dce00cde2dac23",
         "Colonel Spiderman" : "1e7cf8c7a52ad61ca65e9403ebef462bcf4c85c0a9b01c1726ace07f9b14ecac", 
         "President Trump  " : "ec4b5a41fbac55548db79a0d2db9abab37c60026adc6636e3f9c0a64411c7f42"}
 
@@ -45,6 +45,9 @@ def login():
     isBoss = False
     count = 0
     while (count < 3):
+        if(hashed_pass == dict[username]):
+            isBoss = True
+            break
         password = getpass("Wrong Password, re-enter Password: ")
 
         f = open("TempPassword.txt", "w")
@@ -55,9 +58,7 @@ def login():
         process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
         hashed_pass = process.communicate()[0]
         hashed_pass = (hashed_pass.decode("utf-8"))
-        if(hashed_pass == dict[username]):
-            isBoss = True
-            break
+        
         count+=1
 
     print("------------------------------------------------ ")
@@ -108,14 +109,19 @@ def Hash3Files(files: list[str]):
 
 
 def main():
-    #(isBoss, username) = login()
-    isBoss = True
+    (isBoss, username) = login()
     if(isBoss):
     
     #right one
         choice = (int)(input("check log[0]\nsend nuke piece[1]\nChoice: "))
         if(choice == 0):
-            "todo"
+            log_choice = (int)(input("fail log[0]\nlogin log[1]\nChoice: "))
+            if(log_choice==0):
+                logName = "failLogin.txt"
+            else:
+                logName = "loginLog.txt"
+
+            subprocess.run(['cat', f'logs/{logName}'])
         else:
             displayResult = displayFileName()
             selected_files = select3Files(displayResult[0], displayResult[1])
@@ -123,6 +129,12 @@ def main():
 
     else:
         #decoy 
-        "todo"
+        choice = (int)(input("check log[0]\nsend nuke piece[1]\nChoice: "))
+        if(choice == 0):
+            print("Log Empty")
+        else:
+            displayResult = displayFileName()
+            selected_files = select3Files(displayResult[0], displayResult[1])
+            print("NUKE PIECE SENT SUCCESSFULLY")
 
 main()
